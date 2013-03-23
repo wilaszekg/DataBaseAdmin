@@ -38,9 +38,9 @@ public class Application extends Controller {
             session("user", user.login);
             //session("role", user.role.name());
             if (user.role == Role.ADMIN) {
-                return redirect(routes.AdminPanel.inedx());
+                return redirect(routes.AdminPanel.index());
             } else if (user.role == Role.USER) {
-                return redirect(routes.UserPanel.inedx());
+                return redirect(routes.UserPanel.index());
             } else
                 return ok("internal error");
 

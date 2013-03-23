@@ -4,6 +4,7 @@ import be.objectify.deadbolt.core.models.Subject;
 import be.objectify.deadbolt.java.DeadboltHandler;
 import be.objectify.deadbolt.java.DynamicResourceHandler;
 import models.User;
+import play.mvc.Controller;
 import play.mvc.Http;
 import play.mvc.Result;
 
@@ -14,7 +15,7 @@ import play.mvc.Result;
  * Time: 15:26
  * To change this template use File | Settings | File Templates.
  */
-public class MainDeadboltHandler implements DeadboltHandler {
+public class MainDeadboltHandler extends Controller implements DeadboltHandler {
     @Override
     public Result beforeAuthCheck(Http.Context context) {
         return null;  //To change body of implemented methods use File | Settings | File Templates.
@@ -30,7 +31,7 @@ public class MainDeadboltHandler implements DeadboltHandler {
 
     @Override
     public Result onAccessFailure(Http.Context context, String s) {
-        return null;  //To change body of implemented methods use File | Settings | File Templates.
+        return ok("couldn't authenticate");  //To change body of implemented methods use File | Settings | File Templates.
     }
 
     @Override
