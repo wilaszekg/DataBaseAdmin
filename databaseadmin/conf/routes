@@ -17,8 +17,8 @@ POST    /login                  controllers.Application.authenticate()
 GET     /logout                 controllers.Application.logout()
 
 # Admin
-GET     /admin                  controllers.AdminPanel.inedx()
+GET     /admin                  controllers.AdminPanel.index()
 
 
 #User
-GET     /user                   controllers.UserPanel.inedx()
+GET     /user                   controllers.UserPanel.index()

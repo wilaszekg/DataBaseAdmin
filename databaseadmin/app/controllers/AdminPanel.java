@@ -18,7 +18,7 @@ import views.html.adminPanel;
 @Security.Authenticated(Secured.class)
 //@Restrict("admin")
 public class AdminPanel extends Controller {
-    public static Result inedx(){
+    public static Result index(){
         return ok(adminPanel.render());
 
     }

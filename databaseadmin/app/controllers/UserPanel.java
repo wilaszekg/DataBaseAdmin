@@ -18,7 +18,7 @@ import views.html.userPanel;
 @Security.Authenticated(Secured.class)
 //@Restrict("user")
 public class UserPanel extends Controller {
-    public static Result inedx(){
+    public static Result index(){
         return ok(userPanel.render());
 
     }
