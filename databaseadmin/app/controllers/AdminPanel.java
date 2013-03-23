@@ -16,8 +16,14 @@ import views.html.adminPanel;
  */
 
 @Security.Authenticated(Secured.class)
-//@Restrict("admin")
+@Restrict("ADMIN")
 public class AdminPanel extends Controller {
+
+    /**
+     *
+     * @todo This is just a skeleton.
+     * @return
+     */
     public static Result index(){
         return ok(adminPanel.render());
 
