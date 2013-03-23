@@ -6,6 +6,9 @@ import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
 import views.html.adminPanel;
+import views.html.*;
+
+
 
 /**
  * Created with IntelliJ IDEA.
@@ -19,7 +22,12 @@ import views.html.adminPanel;
 //@Restrict("admin")
 public class AdminPanel extends Controller {
     public static Result inedx(){
-        return ok(adminPanel.render());
-
+        return ok(adminPanelMain.render());
     }
+    
+    public static Result users(){
+		return TODO;
+    	
+    }
+    
 }

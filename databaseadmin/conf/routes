@@ -18,6 +18,7 @@ GET     /logout                 controllers.Application.logout()
 
 # Admin
 GET     /admin                  controllers.AdminPanel.inedx()
+GET		/admin/users			controllers.AdminPanel.users()
 
 
 #User

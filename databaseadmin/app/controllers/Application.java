@@ -23,6 +23,7 @@ public class Application extends Controller {
         );
     }
 
+
     public static Result authenticate() {
         session().clear();
         // getting a filled form and a Login object from inside
