@@ -2,6 +2,7 @@ package controllers;
 
 import models.Role;
 import models.User;
+import pl.edu.agh.databaseadmin.security.Secured;
 import play.data.Form;
 import play.mvc.*;
 
@@ -63,7 +64,7 @@ public class Application extends Controller {
      */
     public static Result logout() {
         session().clear();
-        flash("success", "You've been logged out");
+        flash("success", "Wylogowałeś się");
         return redirect(
                 routes.Application.login()
         );
@@ -74,8 +75,16 @@ public class Application extends Controller {
      * @todo To decide where it should redirect. Maybe it should check admin or user main panel, or login site when the user is not authenticated.
      * @return
      */
+
+    @Security.Authenticated(Secured.class)
     public static Result index() {
-        return ok(views.html.index.render());
+        User user = User.findByLogin(session().get("user"));
+        if (user.role == Role.ADMIN) {
+            return redirect(routes.AdminPanel.index());
+        } else if (user.role == Role.USER) {
+            return redirect(routes.UserPanel.index());
+        } else
+            return ok("internal error");
     }
 
 }

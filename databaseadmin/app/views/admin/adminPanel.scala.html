@@ -15,7 +15,7 @@
           <a class="brand" href="#">Database Admin</a>
           <div class="nav-collapse collapse">
             <p class="navbar-text pull-right">
-              Witaj, Username <a href="@routes.Application.logout()">Wyloguj</a>
+              Witaj, @session.get("user") <a href="@routes.Application.logout()">Wyloguj</a>
             </p>
             <ul class="nav">
               <li class="active"><a href="@routes.AdminPanel.index()">Start</a></li>
