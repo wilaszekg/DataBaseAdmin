@@ -30,7 +30,14 @@ public class User extends Model implements Subject {
             String.class, User.class
     );
 
-    public static boolean authenticate(String login, String password) {//TODO: check if password is null
+    /**
+     * Checks if there exist a user with given credentials.
+     * Probably it will be moved to outside authentication service.
+     * @param login
+     * @param password
+     * @return true when there exist a user with login & password given
+     */
+    public static boolean authenticate(String login, String password) {
         User user = findByLogin(login);
         if (user == null)
             return false;
@@ -64,6 +71,11 @@ public class User extends Model implements Subject {
     implementations of Subject interface
     used by DeadBolt
      */
+
+    /**
+     * Deadbolt helper. Returns list od user's roles.
+     * @return
+     */
     @Override
     public List<? extends be.objectify.deadbolt.core.models.Role> getRoles() {
         List<Role> list = new ArrayList<Role>();
@@ -71,11 +83,19 @@ public class User extends Model implements Subject {
         return list;
     }
 
+    /**
+     * Deadbolt helper. Not used as long as users have no permitions declared.
+     * @return an empty list
+     */
     @Override
     public List<? extends Permission> getPermissions() {
         return new ArrayList<Permission>();
     }
 
+    /**
+     * Deadbolt helper.
+     * @return user's login
+     */
     @Override
     public String getIdentifier() {
         return login;

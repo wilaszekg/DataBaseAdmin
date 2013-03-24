@@ -1,6 +1,7 @@
 package models;
 
 /**
+ *
  * Created with IntelliJ IDEA.
  * User: Grzegorz
  * Date: 22.03.13
@@ -11,6 +12,11 @@ public enum Role implements be.objectify.deadbolt.core.models.Role{
     USER,
     ADMIN;
 
+    /**
+     * Text name of a role.
+     * Implementation of deadbol-Role interface.
+     * @return
+     */
     @Override
     public String getName() {
         return name();
