@@ -2,8 +2,6 @@
 
 @adminPanel {
 
-    <h2>Users</h2>
-
 	<div id="UsersTableContainer"></div>
 }
 
@@ -13,7 +11,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         $('#UsersTableContainer').jtable({
-            title: 'Users',
+            title: 'Użytkownicy',
             actions: {
                 listAction: '/admin/users/list',
                 createAction: '/admin/users/create',
@@ -30,12 +28,12 @@
                     create:true
                 },
                 Role: {
-                    title: 'Role',
+                    title: 'Rola',
                     width: '40%'
                 },
                 Password: {
                 	list:false,
-                	title: 'Password'
+                	title: 'Hasło'
                 }
             }
         });
