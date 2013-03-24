@@ -26,11 +26,11 @@ public class User extends Model implements Subject {
     @Enumerated
     public Role role;
 
-    public static Model.Finder<String, User> find = new Model.Finder(
-            Long.class, User.class
+    public static Model.Finder<String, User> find = new Model.Finder<String, User>(
+            String.class, User.class
     );
 
-    public static boolean authenticate(String login, String password) {
+    public static boolean authenticate(String login, String password) {//TODO: check if password is null
         User user = findByLogin(login);
         if (user == null)
             return false;

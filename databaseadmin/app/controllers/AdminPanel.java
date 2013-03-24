@@ -1,11 +1,11 @@
 package controllers;
 
+import models.User;
 import be.objectify.deadbolt.java.actions.Restrict;
 import pl.edu.agh.databaseadmin.security.Secured;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import views.html.adminPanel;
 import views.html.*;
 
 
@@ -26,7 +26,7 @@ public class AdminPanel extends Controller {
     }
     
     public static Result users(){
-		return TODO;
+		return ok(usersManagement.render());
     	
     }
     

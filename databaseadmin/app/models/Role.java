@@ -15,6 +15,7 @@ public enum Role implements be.objectify.deadbolt.core.models.Role{
     public String getName() {
         return name();
     }
+   
 
 
 }
