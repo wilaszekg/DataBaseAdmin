@@ -6,7 +6,7 @@ import pl.edu.agh.databaseadmin.security.Secured;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import views.html.*;
+import views.html.admin.*;
 
 
 
