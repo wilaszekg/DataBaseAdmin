@@ -60,7 +60,7 @@ public class UsersManipulation extends Controller{
 		return ok(result);
 	}
 
-	public static Result update(){
+	public static Result update(){//TODO: not update empty fields
 		User user = getUserFromForm();
 		user.update();
 		return ok(getJsonResultOK());
