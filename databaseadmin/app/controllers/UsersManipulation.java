@@ -5,14 +5,21 @@ import java.util.List;
 import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
 
+import be.objectify.deadbolt.java.actions.Restrict;
+
 import models.User;
+import pl.edu.agh.databaseadmin.security.Secured;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
 import play.mvc.Result;
+import play.mvc.Security;
 
 
 //TODO: validation
+
+@Security.Authenticated(Secured.class)
+@Restrict("ADMIN")
 public class UsersManipulation extends Controller{
 	
 	private static final String JTABLE_RECORDS = "Records";
