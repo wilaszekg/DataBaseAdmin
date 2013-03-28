@@ -1,0 +1,31 @@
+@(types: List[models.DatabaseType])
+
+@servers {
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span2">
+                <div class="well sidebar-nav">
+                    <ul class="nav nav-list">
+                        <li class="nav-header"> Serwery </li>
+                        <li class="active"> <a href="@routes.AdminServers.allServers()"> Wszystkie serwery </a> </li>
+                        @for(t <- types) {
+                            <li> <a href="@routes.AdminServers.serversByType(t.id)"> @t.name @t.version </a> </li>
+                        }
+                    </ul>
+                </div><!--/.well -->
+            </div><!--/span-->
+            <div class="span10">
+                <h1> Wszystkie </h1>
+
+            </div><!--/span-->
+        </div><!--/row-->
+
+        <hr>
+
+        <footer>
+            <p>&copy; AGH 2013</p>
+        </footer>
+
+    </div><!--/.fluid-container-->
+}
+

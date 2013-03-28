@@ -1,3 +1,4 @@
+import models.DatabaseType;
 import play.Application;
 import models.Role;
 import models.User;
@@ -29,6 +30,20 @@ public class Global extends GlobalSettings {
             admin.password = "admin";
             admin.role = Role.ADMIN;
             admin.save();
+        }
+
+        if(DatabaseType.count() == 0) {
+            DatabaseType dt1 = new DatabaseType();
+            dt1.vendor = "Microsoft";
+            dt1.name = "MSSQL";
+            dt1.version = "1.0";
+            dt1.save();
+
+            DatabaseType dt2 = new DatabaseType();
+            dt2.vendor = "Postgres";
+            dt2.name = "PostgreSQL";
+            dt2.version = "2.0";
+            dt2.save();
         }
     }
 
