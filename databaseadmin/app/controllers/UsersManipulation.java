@@ -9,6 +9,7 @@ import be.objectify.deadbolt.java.actions.Restrict;
 
 import models.User;
 import pl.edu.agh.databaseadmin.security.Secured;
+import play.Logger;
 import play.data.Form;
 import play.libs.Json;
 import play.mvc.Controller;
@@ -47,7 +48,6 @@ public class UsersManipulation extends Controller{
 
 
 	public static Result create(){
-
 		User user = getUserFromForm();
 		user.save();
 		

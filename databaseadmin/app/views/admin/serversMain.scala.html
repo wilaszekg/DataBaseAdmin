@@ -12,20 +12,68 @@
                             <li> <a href="@routes.AdminServers.serversByType(t.id)"> @t.name @t.version </a> </li>
                         }
                     </ul>
-                </div><!--/.well -->
-            </div><!--/span-->
+                </div> <!--/.well -->
+            </div> <!--/span-->
             <div class="span10">
-                <h1> Wszystkie </h1>
+                <div id="ServersTableContainer"></div>
 
-            </div><!--/span-->
-        </div><!--/row-->
+            </div> <!--/span-->
+        </div> <!--/row-->
 
         <hr>
 
         <footer>
-            <p>&copy; AGH 2013</p>
+            <p> &copy; AGH 2013 </p>
         </footer>
 
-    </div><!--/.fluid-container-->
+    </div> <!--/.fluid-container-->
 }
 
+
+<script type="text/javascript">
+        $(document).ready(function () {
+            $('#ServersTableContainer').jtable({
+                title: 'Serwery baz danych',
+                sorting: true,
+                defaultSorting: 'DatabaseType ASC',
+                actions: {
+                    listAction: '/admin/servers/list',
+                    createAction: '/admin/servers/create',
+                    updateAction: '/admin/servers/update',
+                    deleteAction: '/admin/servers/delete'
+                },
+                fields: {
+                    Id: {
+                        title: 'Id',
+                        list: false,
+                        key: true
+                    },
+                    DatabaseType: {
+                        title: 'Typ bazy',
+                        options: '/admin/servers/typeOptions'
+                    },
+                    Ip: {
+                        title: 'Ip'
+                    },
+                    Port: {
+                        title: 'Port'
+                    },
+                    Name: {
+                        title: 'Nazwa'
+                    },
+                    Login: {
+                        title: 'Login'
+                    },
+                    Password: {
+                        title: 'Hasło',
+                        type: 'password',
+                        list: false
+                    }
+                }
+            });
+            $('#ServersTableContainer').jtable('load');
+        });
+
+
+
+</script>

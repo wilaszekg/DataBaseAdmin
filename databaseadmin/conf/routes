@@ -24,8 +24,13 @@ POST	/admin/users/create		controllers.UsersManipulation.create()
 POST	/admin/users/update		controllers.UsersManipulation.update()
 POST	/admin/users/delete		controllers.UsersManipulation.delete()
 
-GET     /admin/servers          controllers.AdminServers.allServers()
-GET     /admin/servers/:id      controllers.AdminServers.serversByType(id: Int)
+GET     /admin/servers              controllers.AdminServers.allServers()
+GET     /admin/servers/:id          controllers.AdminServers.serversByType(id: Int)
+POST    /admin/servers/list         controllers.AdminServers.list()
+POST    /admin/servers/create       controllers.AdminServers.create()
+POST    /admin/servers/update       controllers.AdminServers.update()
+POST    /admin/servers/delete       controllers.AdminServers.delete()
+POST    /admin/servers/typeOptions  controllers.AdminServers.typeOptions()
 
 #User
 GET     /user                   controllers.UserPanel.index()

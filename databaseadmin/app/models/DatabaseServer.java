@@ -1,10 +1,13 @@
 package models;
 
+import org.codehaus.jackson.node.ObjectNode;
 import play.db.ebean.Model;
+import play.libs.Json;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
+import javax.persistence.Transient;
 import java.util.List;
 
 /**
@@ -27,9 +30,40 @@ public class DatabaseServer extends Model {
     public String login;
     public String password;
 
+    /*
+    JSON helpers
+     */
+    @Transient
+    public static final String SERVER_ID = "Id";
+    @Transient
+    public static final String SERVER_DB_TYPE = "DatabaseType";
+    @Transient
+    public static final String SERVER_IP = "Ip";
+    @Transient
+    public static final String SERVER_PORT = "Port";
+    @Transient
+    public static final String SERVER_NAME = "Name";
+    @Transient
+    public static final String SERVER_LOGIN = "Login";
+    @Transient
+    public static final String SERVER_PASSWD = "Password";
+
     public static Model.Finder<Long, DatabaseServer> find = new Finder<Long, DatabaseServer>(
             Long.class, DatabaseServer.class
     );
+
+    public ObjectNode toJsonObject(){
+        ObjectNode node = Json.newObject();
+        node.put(SERVER_ID, id);
+        node.put(SERVER_DB_TYPE, databaseType.id);
+        node.put(SERVER_IP, ip);
+        node.put(SERVER_PORT, port);
+        node.put(SERVER_NAME, name);
+        node.put(SERVER_LOGIN, login);
+        node.put(SERVER_PASSWD, password);
+
+        return node;
+    }
 
     public static List<DatabaseServer> all() {
         return find.all();
