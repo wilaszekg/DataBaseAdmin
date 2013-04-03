@@ -6,6 +6,7 @@ import models.DatabaseType;
 import org.codehaus.jackson.node.ArrayNode;
 import org.codehaus.jackson.node.ObjectNode;
 import pl.edu.agh.databaseadmin.security.Secured;
+import play.Logger;
 import play.data.Form;
 import play.data.format.Formatters;
 import play.libs.Json;
@@ -63,7 +64,7 @@ public class AdminServers extends Controller {
     }
 
     public static Result list() {
-        List<DatabaseServer> list = DatabaseServer.all();
+        List<DatabaseServer> list = DatabaseServer.allSorted(Form.form().bindFromRequest().get("jtSorting"));
         ObjectNode result = getJsonResultOK();
         ArrayNode records = result.putArray(JTABLE_RECORDS);
         for (DatabaseServer server : list) {

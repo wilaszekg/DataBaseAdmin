@@ -19,7 +19,12 @@ import java.util.List;
  */
 
 @Entity
-public class DatabaseType extends Model {
+public class DatabaseType extends Model implements Comparable<DatabaseType> {
+    @Override
+    public int compareTo(DatabaseType databaseType) {
+        return this.toString().compareTo(databaseType.toString());
+    }
+
     @Id
     public int id;
 
@@ -92,4 +97,5 @@ public class DatabaseType extends Model {
     public static int count() {
         return find.findRowCount();
     }
+
 }

@@ -1,6 +1,8 @@
 package models;
 
+import com.avaje.ebean.Ebean;
 import org.codehaus.jackson.node.ObjectNode;
+import play.Logger;
 import play.db.ebean.Model;
 import play.libs.Json;
 
@@ -34,19 +36,19 @@ public class DatabaseServer extends Model {
     JSON helpers
      */
     @Transient
-    public static final String SERVER_ID = "Id";
+    public static final String SERVER_ID = "id";
     @Transient
-    public static final String SERVER_DB_TYPE = "DatabaseType";
+    public static final String SERVER_DB_TYPE = "databaseType";
     @Transient
-    public static final String SERVER_IP = "Ip";
+    public static final String SERVER_IP = "ip";
     @Transient
-    public static final String SERVER_PORT = "Port";
+    public static final String SERVER_PORT = "port";
     @Transient
-    public static final String SERVER_NAME = "Name";
+    public static final String SERVER_NAME = "name";
     @Transient
-    public static final String SERVER_LOGIN = "Login";
+    public static final String SERVER_LOGIN = "login";
     @Transient
-    public static final String SERVER_PASSWD = "Password";
+    public static final String SERVER_PASSWD = "password";
 
     public static Model.Finder<Long, DatabaseServer> find = new Finder<Long, DatabaseServer>(
             Long.class, DatabaseServer.class
@@ -67,6 +69,10 @@ public class DatabaseServer extends Model {
 
     public static List<DatabaseServer> all() {
         return find.all();
+    }
+
+    public static List<DatabaseServer> allSorted(String sortPattern) {
+        return find.filter().sort(sortPattern).filter(find.all());
     }
 
     public static void create(DatabaseServer databaseServer) {

@@ -35,7 +35,7 @@
             $('#ServersTableContainer').jtable({
                 title: 'Serwery baz danych',
                 sorting: true,
-                defaultSorting: 'DatabaseType ASC',
+                defaultSorting: 'databaseType ASC',
                 actions: {
                     listAction: '/admin/servers/list',
                     createAction: '/admin/servers/create',
@@ -43,28 +43,28 @@
                     deleteAction: '/admin/servers/delete'
                 },
                 fields: {
-                    Id: {
+                    id: {
                         title: 'Id',
                         list: false,
                         key: true
                     },
-                    DatabaseType: {
+                    databaseType: {
                         title: 'Typ bazy',
                         options: '/admin/servers/typeOptions'
                     },
-                    Ip: {
+                    ip: {
                         title: 'Ip'
                     },
-                    Port: {
+                    port: {
                         title: 'Port'
                     },
-                    Name: {
+                    name: {
                         title: 'Nazwa'
                     },
-                    Login: {
+                    login: {
                         title: 'Login'
                     },
-                    Password: {
+                    password: {
                         title: 'Hasło',
                         type: 'password',
                         list: false
