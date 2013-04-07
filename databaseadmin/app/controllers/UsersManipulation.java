@@ -22,18 +22,18 @@ import play.mvc.Security;
 @Security.Authenticated(Secured.class)
 @Restrict("ADMIN")
 public class UsersManipulation extends Controller{
-	
+
 	private static final String JTABLE_RECORDS = "Records";
 	private static final String JTABLE_RECORD = "Record";
 	private static final String USER_ROLE = "Role";
 	private static final String USER_LOGIN = "Login";
 	private static final String JTABLE_STATUS = "OK";
 	private static final String JTABLE_RESULT = "Result";
-	
+
 	static Form<User> userForm = Form.form(User.class);
 
 	public static Result list(){
-		
+
 		List<User> list = User.all();
 		ObjectNode result = getJsonResultOK();
 		ArrayNode records = result.putArray(JTABLE_RECORDS);
@@ -43,20 +43,20 @@ public class UsersManipulation extends Controller{
 			row.put(USER_ROLE, u.role.toString());
 			records.add(row);
 		}
-		return ok(result);		
+		return ok(result);
 	}
 
 
 	public static Result create(){
 		User user = getUserFromForm();
 		user.save();
-		
+
 		ObjectNode result = getJsonResultOK();
 		ObjectNode userNode = Json.newObject();
 		userNode.put(USER_LOGIN, user.login);
 		userNode.put(USER_ROLE, user.role.toString());
 		result.put(JTABLE_RECORD, userNode);
-		
+
 		return ok(result);
 	}
 
@@ -65,7 +65,7 @@ public class UsersManipulation extends Controller{
 		user.update();
 		return ok(getJsonResultOK());
 	}
-	
+
 	public static Result delete(){
 		User user = getUserFromForm();
 		String login = user.login;
@@ -78,7 +78,7 @@ public class UsersManipulation extends Controller{
 		result.put(JTABLE_RESULT, JTABLE_STATUS);
 		return result;
 	}
-	
+
 	private static User getUserFromForm() {
 		Form<User> filledUserForm = userForm.bindFromRequest();
 		User user = filledUserForm.get();

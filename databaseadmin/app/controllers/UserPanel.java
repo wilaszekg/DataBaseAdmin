@@ -5,7 +5,7 @@ import pl.edu.agh.databaseadmin.security.Secured;
 import play.mvc.Controller;
 import play.mvc.Result;
 import play.mvc.Security;
-import views.html.userPanel;
+import views.html.user.userPanel;
 
 /**
  * Created with IntelliJ IDEA.
