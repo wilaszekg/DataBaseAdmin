@@ -18,6 +18,7 @@ import views.html.admin.*;
  * To change this template use File | Settings | File Templates.
  */
 
+@org.springframework.stereotype.Controller
 @Security.Authenticated(Secured.class)
 @Restrict("ADMIN")
 public class AdminPanel extends Controller {
@@ -27,11 +28,11 @@ public class AdminPanel extends Controller {
      * @todo This is just a skeleton.
      * @return
      */
-    public static Result index(){
+    public Result index(){
         return ok(adminPanelMain.render());
     }
     
-    public static Result users(){
+    public Result users(){
 		return ok(usersManagement.render());
     	
     }

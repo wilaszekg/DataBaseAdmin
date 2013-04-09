@@ -1,7 +1,9 @@
 import models.DatabaseType;
-import play.Application;
 import models.Role;
 import models.User;
+import org.springframework.context.ApplicationContext;
+import org.springframework.context.support.ClassPathXmlApplicationContext;
+import play.Application;
 import play.GlobalSettings;
 
 /**
@@ -13,9 +15,19 @@ import play.GlobalSettings;
  */
 public class Global extends GlobalSettings {
 
+    private ApplicationContext ctx;
 
     @Override
     public void onStart(Application application) {
+        /*
+        This is for final application version:
+         */
+
+        ctx = new ClassPathXmlApplicationContext("components.xml");
+
+        /*
+        This is for development stage:
+         */
         if (User.findByLogin("user") == null) {
             User u1 = new User();
             u1.login = "user";
@@ -32,7 +44,7 @@ public class Global extends GlobalSettings {
             admin.save();
         }
 
-        if(DatabaseType.count() == 0) {
+        if (DatabaseType.count() == 0) {
             DatabaseType dt1 = new DatabaseType();
             dt1.vendor = "Microsoft";
             dt1.name = "MSSQL";
@@ -45,6 +57,19 @@ public class Global extends GlobalSettings {
             dt2.version = "2.0";
             dt2.save();
         }
+    }
+
+    @Override
+    public <A> A getControllerInstance(Class<A> clazz) {
+        if (clazz.isInstance(org.springframework.stereotype.Controller.class))
+            return ctx.getBean(clazz);
+        else
+            try {
+                return super.getControllerInstance(clazz);
+            } catch (Exception e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        return null;
     }
 
 }

@@ -15,6 +15,7 @@ import views.html.user.userPanel;
  * To change this template use File | Settings | File Templates.
  */
 
+@org.springframework.stereotype.Controller
 @Security.Authenticated(Secured.class)
 @Restrict("USER")
 public class UserPanel extends Controller {
@@ -24,7 +25,7 @@ public class UserPanel extends Controller {
      * @todo This is just a skeleton.
      * @return
      */
-    public static Result index(){
+    public Result index(){
         return ok(userPanel.render());
 
     }

@@ -28,6 +28,7 @@ import java.util.Locale;
  * To change this template use File | Settings | File Templates.
  */
 
+@org.springframework.stereotype.Controller
 @Security.Authenticated(Secured.class)
 @Restrict("ADMIN")
 public class AdminServers extends Controller {
@@ -55,15 +56,15 @@ public class AdminServers extends Controller {
         });
     }
 
-    public static Result allServers() {
+    public Result allServers() {
         return ok(serversMain.render(DatabaseType.all()));
     }
 
-    public static Result serversByType(int id) {
+    public Result serversByType(int id) {
         return ok(serversType.render(DatabaseType.all(), id));
     }
 
-    public static Result list() {
+    public Result list() {
         List<DatabaseServer> list = DatabaseServer.allSorted(Form.form().bindFromRequest().get("jtSorting"));
         ObjectNode result = getJsonResultOK();
         ArrayNode records = result.putArray(JTABLE_RECORDS);
@@ -73,7 +74,7 @@ public class AdminServers extends Controller {
         return ok(result);
     }
 
-    public static Result create() {
+    public Result create() {
         DatabaseServer newServer = getServerFromForm();
         newServer.save();
         ObjectNode result = getJsonResultOK();
@@ -82,13 +83,13 @@ public class AdminServers extends Controller {
 
     }
 
-    public static Result update() {
+    public Result update() {
         DatabaseServer updatedServer = getServerFromForm();
         updatedServer.update();
         return ok(getJsonResultOK());
     }
 
-    public static Result delete() {
+    public Result delete() {
         DatabaseServer deletedServer = getServerFromForm();
         long id = deletedServer.id;
         DatabaseServer.remove(id);
@@ -96,7 +97,7 @@ public class AdminServers extends Controller {
 
     }
 
-    public static Result typeOptions() {
+    public Result typeOptions() {
         ObjectNode result = getJsonResultOK();
         ArrayNode options = result.putArray(JTABLE_OPTIONS);
         for (DatabaseType type : DatabaseType.all()) {
@@ -105,7 +106,7 @@ public class AdminServers extends Controller {
         return ok(result);
     }
 
-    private static DatabaseServer getServerFromForm() {
+    private DatabaseServer getServerFromForm() {
         Form<DatabaseServer> filledForm = form.bindFromRequest();
         DatabaseServer dbServer = filledForm.get();
 
@@ -113,7 +114,7 @@ public class AdminServers extends Controller {
     }
 
 
-    private static ObjectNode getJsonResultOK() {
+    private ObjectNode getJsonResultOK() {
         ObjectNode result = Json.newObject();
         result.put(JTABLE_RESULT, JTABLE_STATUS);
         return result;

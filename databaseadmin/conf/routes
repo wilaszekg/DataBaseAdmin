@@ -4,7 +4,7 @@
 
 
 # Home page
-GET     /                               controllers.Application.index()
+GET     /                               @controllers.Application.index()
 
 # Map static resources from the /public folder to the /assets URL path
 GET     /assets/*file                   controllers.Assets.at(path="/public", file)
@@ -12,25 +12,25 @@ GET     /assets/*file                   controllers.Assets.at(path="/public", fi
 
 
 # Authentication
-GET     /login                          controllers.Application.login()
-POST    /login                          controllers.Application.authenticate()
-GET     /logout                         controllers.Application.logout()
+GET     /login                          @controllers.Application.login()
+POST    /login                          @controllers.Application.authenticate()
+GET     /logout                         @controllers.Application.logout()
 
 # Admin
-GET     /admin                          controllers.AdminPanel.index()
-GET		/admin/users			        controllers.AdminPanel.users()
-POST	/admin/users/list		        controllers.UsersManipulation.list()
-POST	/admin/users/create		        controllers.UsersManipulation.create()
-POST	/admin/users/update		        controllers.UsersManipulation.update()
-POST	/admin/users/delete		        controllers.UsersManipulation.delete()
+GET     /admin                          @controllers.AdminPanel.index()
+GET		/admin/users			        @controllers.AdminPanel.users()
+POST	/admin/users/list		        @controllers.UsersManipulation.list()
+POST	/admin/users/create		        @controllers.UsersManipulation.create()
+POST	/admin/users/update		        @controllers.UsersManipulation.update()
+POST	/admin/users/delete		        @controllers.UsersManipulation.delete()
 
-GET     /admin/servers                  controllers.AdminServers.allServers()
-GET     /admin/servers/:id              controllers.AdminServers.serversByType(id: Int)
-POST    /admin/servers/list             controllers.AdminServers.list()
-POST    /admin/servers/create           controllers.AdminServers.create()
-POST    /admin/servers/update           controllers.AdminServers.update()
-POST    /admin/servers/delete           controllers.AdminServers.delete()
-POST    /admin/servers/typeOptions      controllers.AdminServers.typeOptions()
+GET     /admin/servers                  @controllers.AdminServers.allServers()
+GET     /admin/servers/:id              @controllers.AdminServers.serversByType(id: Int)
+POST    /admin/servers/list             @controllers.AdminServers.list()
+POST    /admin/servers/create           @controllers.AdminServers.create()
+POST    /admin/servers/update           @controllers.AdminServers.update()
+POST    /admin/servers/delete           @controllers.AdminServers.delete()
+POST    /admin/servers/typeOptions      @controllers.AdminServers.typeOptions()
 
 #User
-GET     /user                           controllers.UserPanel.index()
+GET     /user                           @controllers.UserPanel.index()

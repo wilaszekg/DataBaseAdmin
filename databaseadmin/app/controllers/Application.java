@@ -6,6 +6,7 @@ import pl.edu.agh.databaseadmin.security.Secured;
 import play.data.Form;
 import play.mvc.*;
 
+@org.springframework.stereotype.Controller
 public class Application extends Controller {
 
     public static class Login {
@@ -21,7 +22,7 @@ public class Application extends Controller {
      * Login action. Clears the session and displays login view.
      * @return
      */
-    public static Result login() {
+    public Result login() {
         session().clear();
         return ok(
                 views.html.login.render(Form.form(Login.class))
@@ -35,7 +36,7 @@ public class Application extends Controller {
      * @todo When the role is neither ADMIN nor USER, a simple text is displayed. If this situation is possible it should be redirected to a separete view.
      * @return
      */
-    public static Result authenticate() {
+    public Result authenticate() {
         session().clear();
         // getting a filled form and a Login object from inside
         Form<Login> filledLoginForm = loginForm.bindFromRequest();
@@ -62,7 +63,7 @@ public class Application extends Controller {
      * Logout action. It clears the user's session.
      * @return
      */
-    public static Result logout() {
+    public Result logout() {
         session().clear();
         flash("success", "Wylogowałeś się");
         return redirect(
@@ -77,7 +78,7 @@ public class Application extends Controller {
      */
 
     @Security.Authenticated(Secured.class)
-    public static Result index() {
+    public Result index() {
         User user = User.findByLogin(session().get("user"));
         if (user.role == Role.ADMIN) {
             return redirect(routes.AdminPanel.index());

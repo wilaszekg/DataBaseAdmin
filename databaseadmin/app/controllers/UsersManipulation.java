@@ -19,6 +19,7 @@ import play.mvc.Security;
 
 //TODO: validation
 
+@org.springframework.stereotype.Controller
 @Security.Authenticated(Secured.class)
 @Restrict("ADMIN")
 public class UsersManipulation extends Controller{
@@ -32,7 +33,7 @@ public class UsersManipulation extends Controller{
 
 	static Form<User> userForm = Form.form(User.class);
 
-	public static Result list(){
+	public Result list(){
 
 		List<User> list = User.all();
 		ObjectNode result = getJsonResultOK();
@@ -47,7 +48,7 @@ public class UsersManipulation extends Controller{
 	}
 
 
-	public static Result create(){
+	public Result create(){
 		User user = getUserFromForm();
 		user.save();
 
@@ -60,13 +61,13 @@ public class UsersManipulation extends Controller{
 		return ok(result);
 	}
 
-	public static Result update(){//TODO: not update empty fields
+	public Result update(){//TODO: not update empty fields
 		User user = getUserFromForm();
 		user.update();
 		return ok(getJsonResultOK());
 	}
 
-	public static Result delete(){
+	public Result delete(){
 		User user = getUserFromForm();
 		String login = user.login;
 		User.remove(login);
