@@ -3,8 +3,10 @@ import models.Role;
 import models.User;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.springframework.stereotype.Controller;
 import play.Application;
 import play.GlobalSettings;
+import play.Logger;
 
 /**
  * Created with IntelliJ IDEA.
@@ -61,14 +63,19 @@ public class Global extends GlobalSettings {
 
     @Override
     public <A> A getControllerInstance(Class<A> clazz) {
-        if (clazz.isInstance(org.springframework.stereotype.Controller.class))
+        // Spring components are taken from context
+        if (clazz.isAnnotationPresent(Controller.class)) {
             return ctx.getBean(clazz);
+        }
         else
+        {
+            // there are some other controllers (e.g. for security tasks)
             try {
                 return super.getControllerInstance(clazz);
             } catch (Exception e) {
-                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+                Logger.error("Controller not found:" + clazz.getName());
             }
+        }
         return null;
     }
 

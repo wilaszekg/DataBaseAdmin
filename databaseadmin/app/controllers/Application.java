@@ -2,12 +2,18 @@ package controllers;
 
 import models.Role;
 import models.User;
+import org.springframework.beans.factory.annotation.Autowired;
+import pl.edu.agh.databaseadmin.security.LdapService;
 import pl.edu.agh.databaseadmin.security.Secured;
+import play.Logger;
 import play.data.Form;
 import play.mvc.*;
 
 @org.springframework.stereotype.Controller
 public class Application extends Controller {
+
+    @Autowired
+    private LdapService ldapService;
 
     public static class Login {
 
