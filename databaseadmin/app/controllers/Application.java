@@ -1,5 +1,6 @@
 package controllers;
 
+import models.AuthenticationMode;
 import models.Role;
 import models.User;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,6 +30,7 @@ public class Application extends Controller {
      * @return
      */
     public Result login() {
+
         session().clear();
         return ok(
                 views.html.login.render(Form.form(Login.class))
@@ -47,12 +49,32 @@ public class Application extends Controller {
         // getting a filled form and a Login object from inside
         Form<Login> filledLoginForm = loginForm.bindFromRequest();
         Login login = filledLoginForm.get();
-        if (!User.authenticate(login.login, login.password)) {
-            filledLoginForm.reject("Invalid user or password");             // setting a global error
+
+        boolean authenticationSuccessful = false;
+        User user = User.findByLogin(login.login);
+        if(user == null || user.authenticationMode == AuthenticationMode.LDAP) {
+            try {
+                try {
+                authenticationSuccessful = ldapService.login(login.login, login.password);
+                } catch (Exception e) {
+                    filledLoginForm.reject("Wystąpił problem podczas uwierzytelniania.");
+                    return badRequest(views.html.login.render(filledLoginForm));
+                }
+                if(user == null) {
+                    user = User.findByLogin(login.login);
+                }
+            } catch (Exception e) {
+                e.printStackTrace();  //To change body of catch statement use File | Settings | File Templates.
+            }
+        } else if (user.authenticationMode == AuthenticationMode.PASSWORD) {
+            authenticationSuccessful = User.authenticate(login.login, login.password);
+
+        }
+        if (!authenticationSuccessful) {
+            filledLoginForm.reject("Niepoprawny login lub hasło.");             // setting a global error
             return badRequest(views.html.login.render(filledLoginForm));
         } else {
             // if authenticated, setting SESSION parameters
-            User user = User.findByLogin(filledLoginForm.get().login);
             session("user", user.login);
             //session("role", user.role.name());
             if (user.role == Role.ADMIN) {

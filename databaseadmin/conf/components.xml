@@ -10,11 +10,16 @@
     <context:component-scan base-package="controllers,pl.edu.agh.databaseadmin.security"/>
 
     <bean id="contextSource" class="org.springframework.ldap.core.support.LdapContextSource">
-        <property name="url" value="ldaps:/host.co:1234" />
-        <property name="userDn" value="dn=userDn" />
-        <property name="password" value="password" />
+        <property name="url" value="ldaps://ldapik.com:636" />
+        <property name="userDn" value="cn=cwaniak" />
+        <property name="password" value="cwaniak" />
     </bean>
-    <!--<bean id="ldapTemplate" class="org.springframework.ldap.core.LdapTemplate">
+
+    <bean id="ldapTemplate" class="org.springframework.ldap.core.LdapTemplate">
         <constructor-arg ref="contextSource" />
-    </bean>    -->
+    </bean>
+
+    <bean id="baseNameHolder" class="pl.edu.agh.databaseadmin.security.BaseNameHolder">
+        <property name="name" value="czesc userDn po pierwszym przecinku" />
+    </bean>
 </beans>

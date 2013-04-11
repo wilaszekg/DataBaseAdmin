@@ -26,7 +26,12 @@ create table user (
   login                     varchar(255) not null,
   password                  varchar(255),
   role                      integer,
+  authentication_mode       integer,
+  first_name                varchar(255),
+  second_name               varchar(255),
+  email                     varchar(255),
   constraint ck_user_role check (role in (0,1)),
+  constraint ck_user_authentication_mode check (authentication_mode in (0,1)),
   constraint pk_user primary key (login))
 ;
 

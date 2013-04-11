@@ -25,10 +25,19 @@ public class User extends Model implements Subject {
     public String password;
     @Enumerated
     public Role role;
+    @Enumerated
+    public AuthenticationMode authenticationMode;
+    @Embedded
+    public UserInfo userInfo;
 
     public static Model.Finder<String, User> find = new Model.Finder<String, User>(
             String.class, User.class
     );
+
+    public User(){
+        // default authentication strategy (others should be detected)
+        authenticationMode = AuthenticationMode.PASSWORD;
+    }
 
     /**
      * Checks if there exist a user with given credentials.
